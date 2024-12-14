@@ -1,4 +1,4 @@
-package com.study.ddd.web.exception;
+package com.study.mothr.common.exception;
 
 
 import org.springframework.http.HttpStatus;
