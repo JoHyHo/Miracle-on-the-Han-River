@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserController extends ApiResponse{
 
     private final UserAppService userAppService;
 
@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO, @RequestParam String password) {
         UserDTO createdUser = userAppService.registerUser(userDTO, password);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        return ok();
     }
 
     @GetMapping("/{id}")
