@@ -1,32 +1,29 @@
-package com.study.ddd.infrastructure.persistence.entity;
+package com.study.mothr.infrastructure.persistence.common;
+
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Entity
+@MappedSuperclass
 @Getter
-@Builder
-@Table(name = "users")
-public class UserEntity {
+public abstract class BaseEntityPersistence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-    private String email;
-    private String password;
-
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+        updatedAt = createdAt;
     }
 
     @PreUpdate
